@@ -249,7 +249,7 @@ html.splash-lock,html.splash-lock body{overflow:hidden}
 #splash .pct{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:.3em}
 #splash .skip{position:absolute;z-index:2;top:calc(24px + env(safe-area-inset-top,0px));right:max(var(--gutter),24px);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);opacity:0;animation:spIn .8s 1.8s ease forwards;transition:color .3s}
 #splash:hover .skip{color:var(--gold-hi)}
-#splash .credit-sp{position:absolute;z-index:2;left:16px;right:16px;bottom:calc(30px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:10px;text-align:center}
+#splash .credit-sp{display:grid;justify-items:center;gap:10px;text-align:center;margin-top:6px;max-width:calc(100vw - 32px)}
 #splash .credit-sp .ln{width:40px;height:1px;background:var(--gold);transform:scaleX(0);animation:spLine .9s 1.4s cubic-bezier(.7,0,.2,1) forwards}
 #splash .credit-sp p{margin:0;font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:.38em;text-transform:uppercase;line-height:1.8;padding-left:.38em;
   background:linear-gradient(100deg,#6f6c66 0%,#6f6c66 40%,var(--gold-hi) 50%,#6f6c66 60%,#6f6c66 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -297,13 +297,13 @@ html.splash-lock,html.splash-lock body{overflow:hidden}
     </svg>
     <div class="name" aria-hidden="true"><span style="animation-delay:0.90s">L</span><span style="animation-delay:0.95s">I</span><span style="animation-delay:1.00s">O</span><span style="animation-delay:1.05s">N</span><span style="animation-delay:1.10s">E</span><span style="animation-delay:1.15s">L</span><span style="animation-delay:1.20s"> </span><span style="animation-delay:1.25s">M</span><span style="animation-delay:1.30s">E</span><span style="animation-delay:1.35s">S</span><span style="animation-delay:1.40s">S</span><span style="animation-delay:1.45s">I</span></div>
     <div class="bar"><i id="spbar"></i></div>
-    <div class="pct" id="sppct">000</div>
+    <div class="pct" id="sppct">0%</div>
+    <div class="credit-sp">
+      <span class="ln"></span>
+      <p>Vardan — Tiezerqi Tagavor<span class="x">×</span><b>Ero</b></p>
+  </div>
   </div>
   <div class="skip">Skip →</div>
-  <div class="credit-sp">
-    <span class="ln"></span>
-    <p>Vardan — Tiezerqi Tagavor<span class="x">×</span><b>Ero</b></p>
-  </div>
 </div>
 
 
@@ -774,12 +774,12 @@ html.splash-lock,html.splash-lock body{overflow:hidden}
     shown += (target - shown) * .1;
     if (loaded && time >= 1 && shown > .995) shown = 1;
     bar.style.transform = 'scaleX(' + shown + ')';
-    pct.textContent = String(Math.round(shown * 100)).padStart(3, '0');
+    pct.textContent = Math.round(shown * 100) + '%';
     if (shown >= 1) finish(); else requestAnimationFrame(tick);
   }
   function finish(){
     if (done) return; done = true;
-    bar.style.transform = 'scaleX(1)'; pct.textContent = '100';
+    bar.style.transform = 'scaleX(1)'; pct.textContent = '100%';
     setTimeout(() => {
       burst = performance.now();
       sp.classList.add('out');
